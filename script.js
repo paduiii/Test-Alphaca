@@ -1,5 +1,5 @@
 const suits = ['♠', '♥', '♦', '♣'];
-const ranks = ['K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'A'];
+const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 let deck = [];
 let playerHand = [];
 let botHand = [];
@@ -102,10 +102,10 @@ function playTurn() {
   const playerValue = ranks.indexOf(playerCard.rank); // ค่าของไพ่ผู้เล่น
   const botValue = ranks.indexOf(botCard.rank); // ค่าของไพ่บอท
 
-  if (playerValue < botValue) {
-    playerScore++; // ถ้าบอทชนะ เพิ่มคะแนนให้บอท
-  } else if (playerValue > botValue) {
-    playerScore++; // ถ้าผู้เล่นชนะ เพิ่มคะแนนให้ผู้เล่น
+  if (playerValue > botValue) {
+    playerScore++;
+  } else if (playerValue < botValue) {
+    botScore++;
   }
 
   updateScores(); // อัปเดตคะแนน
