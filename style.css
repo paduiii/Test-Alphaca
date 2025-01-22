@@ -90,7 +90,7 @@ button:hover {
 } 
 
 #pile .card {
-    margin: 0 auto;
+    margin: 10px;
 }
 
 /* สไตล์สำหรับปุ่ม toggle-log */
