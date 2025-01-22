@@ -113,7 +113,6 @@ function playTurn() {
   updateHands(); // อัปเดตการแสดงผลไพ่ในมือ
 }
 
-
 // อัปเดตกองกลาง
 function updatePile() {
   const pileDiv = document.getElementById('pile');
@@ -131,15 +130,38 @@ function updatePile() {
 
 // แสดงคะแนน
 function updateScores() {
-  document.getElementById('player-score').textContent = playerScore;
-  document.getElementById('bot-score').textContent = botScore;
+  const scoreDisplay = document.getElementById('score-display');
+  scoreDisplay.textContent = `Player: ${playerScore} | Bot: ${botScore}`;
 }
+
 
 // บันทึกการกระทำ
 function logAction(playerCard, botCard) {
   const logDiv = document.getElementById('log');
   logDiv.innerHTML += `ผู้เล่น: ${playerCard.rank}${playerCard.suit}, บอท: ${botCard.rank}${botCard.suit}<br>`;
 }
+
+// ฟังก์ชันสำหรับสับเปลี่ยนการแสดงผลของประวัติการเล่น
+function toggleLog() {
+  const logDiv = document.getElementById('log');
+  const toggleButton = document.getElementById('toggle-log');
+  if (logDiv.style.display === 'none') {
+    logDiv.style.display = 'block';
+    toggleButton.textContent = 'Hide Match History';
+  } else {
+    logDiv.style.display = 'none';
+    toggleButton.textContent = 'Show Match History';
+  }
+}
+
+// เพิ่ม event listener ให้กับปุ่ม toggle-log
+document.getElementById('toggle-log').addEventListener('click', toggleLog);
+
+// ฟังก์ชันอื่น ๆ ของเกม...
+
+// เริ่มเกมครั้งแรก
+restartGame();
+
 
 // จบเกม
 function endGame() {
