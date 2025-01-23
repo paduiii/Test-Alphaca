@@ -1,40 +1,40 @@
 body {
-    /* display: flex; */
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f9;
-    color: #333;
-    /* justify-content: center;
+  /* display: flex; */
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f4f4f9;
+  color: #333;
+  /* justify-content: center;
     align-items: center; */
 }
 
 #game {
-    margin: 20px auto;
-    width: 90%;
-    height: 100%;
-    max-width: 800px;
-    border: 1px solid #ccc;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 90%;
+  height: 100%;
+  max-width: 800px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background: #000000;
-    color: #fff;
-    border: solid;
-    border-radius: 10px;
-    cursor: pointer;
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #000000;
+  color: #fff;
+  border: solid;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 button:hover {
-    background: #ffffff;
-    color: #000000;
-    border: solid #000000;
+  background: #ffffff;
+  color: #000000;
+  border: solid #000000;
 }
 
 .card {
@@ -46,11 +46,11 @@ button:hover {
   border-radius: 10px;
   background: #f15050; /* สีพื้นหลัง */
   background-image: repeating-linear-gradient(
-    45deg,              /* มุมของเส้น */
-    rgba(255, 223, 40, 0.397), /* สีของเส้นที่จาง */
-    rgba(255, 223, 40, 0.2) 10px, /* ระยะเส้นแรก */
-    transparent 10px, /* ช่องว่างระหว่างเส้น */
-    transparent 20px  /* ระยะเส้นถัดไป */
+    45deg,
+    /* มุมของเส้น */ rgba(255, 223, 40, 0.397),
+    /* สีของเส้นที่จาง */ rgba(255, 223, 40, 0.2) 10px,
+    /* ระยะเส้นแรก */ transparent 10px,
+    /* ช่องว่างระหว่างเส้น */ transparent 20px /* ระยะเส้นถัดไป */
   );
   text-align: center;
   line-height: 120px;
@@ -61,64 +61,64 @@ button:hover {
 }
 
 .card .rank {
-    position: relative;
-    top: 0px;
-    left: 0px;
-    font-size: 50px;
-    -webkit-text-fill-color: white;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  font-size: 50px;
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
 }
 
 .card .suit {
-    position: absolute;
-    bottom: 40px;
-    right: 8px;
-    font-size: 30px;
+  position: absolute;
+  bottom: 40px;
+  right: 8px;
+  font-size: 30px;
 }
 
 .card.bot {
-    background: #faad1e;
-    background-image: repeating-linear-gradient(
-        45deg,              /* มุมของเส้น */
-        rgba(0, 0, 0, 0.63), /* สีของเส้นที่จาง */
-        rgba(0, 0, 0, 0.2) 10px, /* ระยะเส้นแรก */
-        transparent 10px, /* ช่องว่างระหว่างเส้น */
-        transparent 20px  /* ระยะเส้นถัดไป */
-      );
-    border: 2px solid #000000;
-} 
+  background: #faad1e;
+  background-image: repeating-linear-gradient(
+    45deg,
+    /* มุมของเส้น */ rgba(0, 0, 0, 0.63),
+    /* สีของเส้นที่จาง */ rgba(0, 0, 0, 0.2) 10px,
+    /* ระยะเส้นแรก */ transparent 10px,
+    /* ช่องว่างระหว่างเส้น */ transparent 20px /* ระยะเส้นถัดไป */
+  );
+  border: 2px solid #000000;
+}
 
 #pile .card {
-    margin: 10px;
+  margin: 10px;
 }
 
 /* สไตล์สำหรับปุ่ม toggle-log */
 #toggle-log {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background: #000000;
-    color: #fff;
-    border: solid;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  
-  #toggle-log:hover {
-    background: #ffffff;
-    color: #000;
-    border: solid #000000;
-  }
-  
-  /* สไตล์สำหรับส่วนประวัติการเล่น */
-  #log {
-    margin-top: 20px;
-    padding: 10px;
-    background: #eee;
-    border-radius: 5px;
-    overflow-y: auto;
-    max-height: 150px;
-    text-align: left;
-    display: none; /* ซ่อนโดยค่าเริ่มต้น */
-  }
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #000000;
+  color: #fff;
+  border: solid;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#toggle-log:hover {
+  background: #ffffff;
+  color: #000;
+  border: solid #000000;
+}
+
+/* สไตล์สำหรับส่วนประวัติการเล่น */
+#log {
+  margin-top: 20px;
+  padding: 10px;
+  background: #eee;
+  border-radius: 5px;
+  overflow-y: auto;
+  max-height: 150px;
+  text-align: left;
+  display: none; /* ซ่อนโดยค่าเริ่มต้น */
+}

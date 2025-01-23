@@ -183,7 +183,7 @@ function restartGame() {
 }
 
 // ตั้งค่าปุ่ม
-document.getElementById('play-turn').addEventListener('click', playTurn);
+document.getElementById('play').addEventListener('click', playTurn);
 document.getElementById('restart').addEventListener('click', restartGame);
 
 // เริ่มเกมครั้งแรก
