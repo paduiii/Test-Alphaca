@@ -134,6 +134,12 @@ window.addEventListener('click', (event) => {
 // เพิ่มปุ่มสำหรับเปิด Modal
 document.getElementById('toggle-log').addEventListener('click', openLogModal);
 
+// ฟังก์ชันสำหรับการสุ่ม
+function pickRandomCard(hand) {
+  const randomIndex = Math.floor(Math.random() * hand.length);
+  return hand.splice(randomIndex, 1)[0]; // ดึงไพ่จากตำแหน่งสุ่มแล้วลบออกจากมือ
+}
+
 // ฟังก์ชันสำหรับเล่นแต่ละเทิร์น
 function playTurn() {
   if (playerHand.length === 0 || botHand.length === 0) {
@@ -141,8 +147,8 @@ function playTurn() {
     return;
   }
 
-  const playerCard = playerHand.pop(); // หยิบไพ่ใบสุดท้ายของผู้เล่น
-  const botCard = botHand.pop(); // หยิบไพ่ใบสุดท้ายของบอท
+  const playerCard = pickRandomCard(playerHand); // หยิบไพ่แบบสุ่มของผู้เล่น
+  const botCard = pickRandomCard(botHand); // หยิบไพ่แบบสุ่มของบอท
   pile = [playerCard, botCard]; // วางไพ่ลงในกองกลาง
   updatePile(); // อัปเดตการแสดงกองกลาง
 
