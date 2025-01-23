@@ -52,7 +52,7 @@ function displayPlayerHand() {
   });
 }
 
-// แสดงไพ่ของบอทเป็น "หลังไพ่"
+// แสดงไพ่ของบอท
 function displayBotHand() {
   const botCardsDiv = document.getElementById('bot-cards');
   botCardsDiv.innerHTML = '';
@@ -63,31 +63,78 @@ function displayBotHand() {
   });
 }
 
-function updateHands() {
-  // อัปเดตการแสดงไพ่ในมือของผู้เล่น
-  const playerHandDiv = document.getElementById('player-hand');
-  playerHandDiv.innerHTML = '';
-  playerHand.forEach((card, index) => {
+// อัปเดตการแสดงกองกลางพร้อมจำนวนการ์ด
+function updatePile() {
+  const pileDiv = document.getElementById('pile');
+  pileDiv.innerHTML = '';
+
+  // การ์ดในกองกลาง
+  pile.forEach(card => {
     const cardDiv = document.createElement('div');
     cardDiv.classList.add('card');
     cardDiv.innerHTML = `
       <div class="rank">${card.rank}</div>
       <div class="suit">${card.suit}</div>
     `;
-    cardDiv.setAttribute('data-index', index);
-    playerHandDiv.appendChild(cardDiv);
+    pileDiv.appendChild(cardDiv);
   });
 
-  // อัปเดตการแสดงไพ่ในมือของบอท
-  const botCardsDiv = document.getElementById('bot-cards');
-  botCardsDiv.innerHTML = '';
-  botHand.forEach(() => {
-    const cardDiv = document.createElement('div');
-    cardDiv.classList.add('card', 'bot');
-    botCardsDiv.appendChild(cardDiv);
-  });
+  // แสดงจำนวนการ์ดที่เหลือในกอง (Deck)
+  const deckCountDiv = document.createElement('div');
+  deckCountDiv.classList.add('card', 'bot'); // ใช้สไตล์ "การ์ดคว่ำ"
+  deckCountDiv.innerHTML = `<div style="font-size: 16px;">${deck.length} Cards</div>`;
+  pileDiv.appendChild(deckCountDiv);
 }
 
+// แสดงคะแนน
+function updateScores() {
+  const scoreDisplay = document.getElementById('score-display');
+  scoreDisplay.textContent = `Player: ${playerScore} | Bot: ${botScore}`;
+}
+
+// บันทึกการกระทำ
+function logAction(playerCard, botCard) {
+  const logDiv = document.getElementById('log');
+  logDiv.innerHTML += `ผู้เล่น: ${playerCard.rank}${playerCard.suit}, บอท: ${botCard.rank}${botCard.suit}<br>`;
+}
+
+// ฟังก์ชันสำหรับการแสดงผลของประวัติการเล่น
+function toggleLog() {
+  const logDiv = document.getElementById('log');
+  const toggleButton = document.getElementById('toggle-log');
+    logDiv.style.display = 'Block';
+    toggleButton.textContent = 'Show Match History';
+}
+
+document.getElementById('toggle-log').addEventListener('click', toggleLog);
+
+// ฟังก์ชันเปิด Modal
+function openLogModal() {
+  const modal = document.getElementById('logModal');
+  modal.style.display = 'block';
+}
+
+// ฟังก์ชันปิด Modal
+function closeLogModal() {
+  const modal = document.getElementById('logModal');
+  modal.style.display = 'none';
+}
+
+// ตั้งค่าปุ่มปิด Modal
+document.querySelector('.close').addEventListener('click', closeLogModal);
+
+// ปิด Modal เมื่อคลิกข้างนอก
+window.addEventListener('click', (event) => {
+  const modal = document.getElementById('logModal');
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+// เพิ่มปุ่มสำหรับเปิด Modal
+document.getElementById('toggle-log').addEventListener('click', openLogModal);
+
+// ฟังก์ชันสำหรับเล่นแต่ละเทิร์น
 function playTurn() {
   if (playerHand.length === 0 || botHand.length === 0) {
     endGame(); // ถ้าไพ่หมดมือ ให้จบเกม
@@ -106,6 +153,12 @@ function playTurn() {
     playerScore++;
   } else if (playerValue < botValue) {
     botScore++;
+  } else {
+    // กรณีเสมอ จั่วการ์ดใหม่แบบสุ่ม
+    if (deck.length >= 2) { // ตรวจสอบว่ามีการ์ดเพียงพอให้จั่ว
+      playerHand.push(deck.pop()); // ผู้เล่นจั่วการ์ดใหม่
+      botHand.push(deck.pop()); // บอทจั่วการ์ดใหม่
+    }
   }
 
   updateScores(); // อัปเดตคะแนน
@@ -113,55 +166,10 @@ function playTurn() {
   updateHands(); // อัปเดตการแสดงผลไพ่ในมือ
 }
 
-// อัปเดตกองกลาง
-function updatePile() {
-  const pileDiv = document.getElementById('pile');
-  pileDiv.innerHTML = '';
-  pile.forEach(card => {
-    const cardDiv = document.createElement('div');
-    cardDiv.classList.add('card');
-    cardDiv.innerHTML = `
-      <div class="rank">${card.rank}</div>
-      <div class="suit">${card.suit}</div>
-    `;
-    pileDiv.appendChild(cardDiv);
-  });
+function updateHands() {
+  displayPlayerHand();
+  displayBotHand();
 }
-
-// แสดงคะแนน
-function updateScores() {
-  const scoreDisplay = document.getElementById('score-display');
-  scoreDisplay.textContent = `Player: ${playerScore} | Bot: ${botScore}`;
-}
-
-
-// บันทึกการกระทำ
-function logAction(playerCard, botCard) {
-  const logDiv = document.getElementById('log');
-  logDiv.innerHTML += `ผู้เล่น: ${playerCard.rank}${playerCard.suit}, บอท: ${botCard.rank}${botCard.suit}<br>`;
-}
-
-// ฟังก์ชันสำหรับสับเปลี่ยนการแสดงผลของประวัติการเล่น
-function toggleLog() {
-  const logDiv = document.getElementById('log');
-  const toggleButton = document.getElementById('toggle-log');
-  if (logDiv.style.display === 'none') {
-    logDiv.style.display = 'block';
-    toggleButton.textContent = 'Hide Match History';
-  } else {
-    logDiv.style.display = 'none';
-    toggleButton.textContent = 'Show Match History';
-  }
-}
-
-// เพิ่ม event listener ให้กับปุ่ม toggle-log
-document.getElementById('toggle-log').addEventListener('click', toggleLog);
-
-// ฟังก์ชันอื่น ๆ ของเกม...
-
-// เริ่มเกมครั้งแรก
-restartGame();
-
 
 // จบเกม
 function endGame() {
@@ -173,13 +181,15 @@ function endGame() {
 function restartGame() {
   createDeck();
   dealCards();
+  pile = [];
+  document.getElementById('pile').innerHTML = ''; // ล้างการแสดงผลใน UI
   displayPlayerHand();
   displayBotHand();
   playerScore = 0;
   botScore = 0;
   updateScores();
-  document.getElementById('log').innerHTML = '';
-  document.getElementById('pile').innerHTML = '';
+  document.getElementById('log').innerHTML = ''; // ล้างประวัติการเล่น
+  updatePile(); // อัปเดตกองกลาง
 }
 
 // ตั้งค่าปุ่ม
